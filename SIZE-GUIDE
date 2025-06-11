@@ -1,0 +1,912 @@
+<style>
+  /* Shared styles for all size guides */
+  #size-guide,
+  #size-guide-babies,
+  #size-guide-toddlers,
+  #size-guide-boys,
+  #size-guide-womens,
+  #size-guide-womens-bottoms,
+  #size-guide-mens-tops,
+  #size-guide-mens-bottoms {
+    /* empty base selector for grouping */
+  }
+
+  /* details styling */
+  #size-guide details,
+  #size-guide-babies details,
+  #size-guide-toddlers details,
+  #size-guide-boys details,
+  #size-guide-womens details,
+  #size-guide-womens-bottoms details,
+  #size-guide-mens-tops details,
+  #size-guide-mens-bottoms details {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 1em;
+    overflow: hidden;
+  }
+
+  /* summary styling */
+  #size-guide summary,
+  #size-guide-babies summary,
+  #size-guide-toddlers summary,
+  #size-guide-boys summary,
+  #size-guide-womens summary,
+  #size-guide-womens-bottoms summary,
+  #size-guide-mens-tops summary,
+  #size-guide-mens-bottoms summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 12px 20px;
+    background-color: #f7f7f7;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #222;
+    user-select: none;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* hide default details marker */
+  #size-guide summary::-webkit-details-marker,
+  #size-guide-babies summary::-webkit-details-marker,
+  #size-guide-toddlers summary::-webkit-details-marker,
+  #size-guide-boys summary::-webkit-details-marker,
+  #size-guide-womens summary::-webkit-details-marker,
+  #size-guide-womens-bottoms summary::-webkit-details-marker,
+  #size-guide-mens-tops summary::-webkit-details-marker,
+  #size-guide-mens-bottoms summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* custom arrow */
+  #size-guide summary::after,
+  #size-guide-babies summary::after,
+  #size-guide-toddlers summary::after,
+  #size-guide-boys summary::after,
+  #size-guide-womens summary::after,
+  #size-guide-womens-bottoms summary::after,
+  #size-guide-mens-tops summary::after,
+  #size-guide-mens-bottoms summary::after {
+    content: "▸";
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+    color: #555;
+  }
+
+  /* rotate arrow on open */
+  #size-guide details[open] summary::after,
+  #size-guide-babies details[open] summary::after,
+  #size-guide-toddlers details[open] summary::after,
+  #size-guide-boys details[open] summary::after,
+  #size-guide-womens details[open] summary::after,
+  #size-guide-womens-bottoms details[open] summary::after,
+  #size-guide-mens-tops details[open] summary::after,
+  #size-guide-mens-bottoms details[open] summary::after {
+    transform: rotate(90deg);
+  }
+
+  /* details content div */
+  #size-guide details > div,
+  #size-guide-babies details > div,
+  #size-guide-toddlers details > div,
+  #size-guide-boys details > div,
+  #size-guide-womens details > div,
+  #size-guide-womens-bottoms details > div,
+  #size-guide-mens-tops details > div,
+  #size-guide-mens-bottoms details > div {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: white;
+  }
+
+  /* table styling */
+  #size-guide table,
+  #size-guide-babies table,
+  #size-guide-toddlers table,
+  #size-guide-boys table,
+  #size-guide-womens table,
+  #size-guide-womens-bottoms table,
+  #size-guide-mens-tops table,
+  #size-guide-mens-bottoms table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+    font-family: Arial, sans-serif;
+  }
+
+  /* table cells */
+  #size-guide th,
+  #size-guide td,
+  #size-guide-babies th,
+  #size-guide-babies td,
+  #size-guide-toddlers th,
+  #size-guide-toddlers td,
+  #size-guide-boys th,
+  #size-guide-boys td,
+  #size-guide-womens th,
+  #size-guide-womens td,
+  #size-guide-womens-bottoms th,
+  #size-guide-womens-bottoms td,
+  #size-guide-mens-tops th,
+  #size-guide-mens-tops td,
+  #size-guide-mens-bottoms th,
+  #size-guide-mens-bottoms td {
+    border: 1px solid #ced4d9;
+    padding: 8px 12px;
+    text-align: center;
+  }
+
+  /* table header row */
+  #size-guide thead tr,
+  #size-guide-babies thead tr,
+  #size-guide-toddlers thead tr,
+  #size-guide-boys thead tr,
+  #size-guide-womens thead tr,
+  #size-guide-womens-bottoms thead tr,
+  #size-guide-mens-tops thead tr,
+  #size-guide-mens-bottoms thead tr {
+    background-color: #f9f9f9;
+  }
+
+  /* zebra stripes */
+  #size-guide tbody tr:nth-child(even),
+  #size-guide-babies tbody tr:nth-child(even),
+  #size-guide-toddlers tbody tr:nth-child(even),
+  #size-guide-boys tbody tr:nth-child(even),
+  #size-guide-womens tbody tr:nth-child(even),
+  #size-guide-womens-bottoms tbody tr:nth-child(even),
+  #size-guide-mens-tops tbody tr:nth-child(even),
+  #size-guide-mens-bottoms tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
+  }
+</style>
+
+
+<!-- Mens Bottoms Size Guide -->
+<div id="size-guide-mens-bottoms">
+  <details>
+    <summary>Men’s Bottoms</summary>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>SIZE</th>
+            <th>WAIST</th>
+            <th>HIP</th>
+            <th>INSEAM (LENGTH)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>XS</td>
+            <td>71 - 76cm / 28 - 30"</td>
+            <td>91 - 97cm / 36 - 38"</td>
+            <td>81.3cm / 32"</td>
+          </tr>
+          <tr>
+            <td>S</td>
+            <td>76 - 81cm / 30 - 32"</td>
+            <td>97 - 102cm / 38 - 40"</td>
+            <td>81.3cm / 32"</td>
+          </tr>
+          <tr>
+            <td>M</td>
+            <td>81 - 86cm / 32 - 34"</td>
+            <td>102 - 107cm / 40 - 42"</td>
+            <td>82.5cm / 32.5"</td>
+          </tr>
+          <tr>
+            <td>L</td>
+            <td>86 - 91cm / 34 - 36"</td>
+            <td>107 - 112cm / 42 - 44"</td>
+            <td>84cm / 33"</td>
+          </tr>
+          <tr>
+            <td>XL</td>
+            <td>91 - 97cm / 36 - 38"</td>
+            <td>112 - 117cm / 44 - 46"</td>
+            <td>85.7cm / 33.7"</td>
+          </tr>
+          <tr>
+            <td>2XL</td>
+            <td>97 - 102cm / 38 - 40"</td>
+            <td>117 - 122cm / 46 - 48"</td>
+            <td>86.3cm / 34"</td>
+          </tr>
+          <tr>
+            <td>3XL</td>
+            <td>102 - 107cm / 40 - 42"</td>
+            <td>122 - 127cm / 48 - 50"</td>
+            <td>86.7cm / 34.1"</td>
+          </tr>
+          <tr>
+            <td>4XL</td>
+            <td>107 - 112cm / 42 - 44"</td>
+            <td>127 - 132cm / 50 - 52"</td>
+            <td>86.7cm / 34.1"</td>
+          </tr>
+          <tr>
+            <td>5XL</td>
+            <td>112 - 117cm / 44 - 46"</td>
+            <td>132 - 137cm / 52 - 54"</td>
+            <td>86.7cm / 34.1"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+  
+<!-- Mens Tops Size Guide -->
+<div id="size-guide-mens-tops">
+  <details>
+    <summary>Men’s Tops</summary>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>SIZE</th>
+            <th>CHEST</th>
+            <th>WAIST</th>
+            <th>ARM LENGTH (LONG)</th>
+            <th>NECK</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>XS</td>
+            <td>86 - 91cm / 34 - 36"</td>
+            <td>71 - 76cm / 28 - 30"</td>
+            <td>84.5cm / 33.2"</td>
+            <td>37cm / 14.5"</td>
+          </tr>
+          <tr>
+            <td>S</td>
+            <td>91 - 97cm / 36 - 38"</td>
+            <td>76 - 81cm / 30 - 32"</td>
+            <td>85cm / 33.5"</td>
+            <td>38cm / 15"</td>
+          </tr>
+          <tr>
+            <td>M</td>
+            <td>97 - 102cm / 38 - 40"</td>
+            <td>81 - 86cm / 32 - 34"</td>
+            <td>86cm / 33.7"</td>
+            <td>39.5cm / 15.5"</td>
+          </tr>
+          <tr>
+            <td>L</td>
+            <td>102 - 107cm / 40 - 42"</td>
+            <td>86 - 91cm / 34 - 36"</td>
+            <td>86.7cm / 34"</td>
+            <td>40.5cm / 16"</td>
+          </tr>
+          <tr>
+            <td>XL</td>
+            <td>107 - 112cm / 42 - 44"</td>
+            <td>91 - 97cm / 36 - 38"</td>
+            <td>87.5cm / 34.2"</td>
+            <td>42cm / 16.5"</td>
+          </tr>
+          <tr>
+            <td>2XL</td>
+            <td>112 - 117cm / 44 - 46"</td>
+            <td>97 - 102cm / 38 - 40"</td>
+            <td>89cm / 35"</td>
+            <td>43cm / 17"</td>
+          </tr>
+          <tr>
+            <td>3XL</td>
+            <td>117 - 127cm / 46 - 48"</td>
+            <td>102 - 107cm / 40 - 42"</td>
+            <td>91cm / 35.8"</td>
+            <td>44.5cm / 17.5"</td>
+          </tr>
+          <tr>
+            <td>4XL</td>
+            <td>127 - 137cm / 48 - 50"</td>
+            <td>107 - 112cm / 42 - 44"</td>
+            <td>94cm / 37"</td>
+            <td>45.5cm / 18"</td>
+          </tr>
+          <tr>
+            <td>5XL</td>
+            <td>137 - 147cm / 50 - 52"</td>
+            <td>112 - 117cm / 44 - 46"</td>
+            <td>94cm / 37"</td>
+            <td>48cm / 18.9"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+<!-- Mens Sweat Boxers Size Guide -->
+<div id="size-guide-mens-bottoms">
+  <details>
+    <summary>Mens Sweat Boxers</summary>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>SIZE</th>
+            <th>ELASTICATED WAIST</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>28 - XS</td>
+            <td>71 - 76cm / 28 - 30"</td>
+          </tr>
+          <tr>
+            <td>30 - S</td>
+            <td>76 - 81cm / 30 - 32"</td>
+          </tr>
+          <tr>
+            <td>32 - M</td>
+            <td>81 - 86cm / 32 - 34"</td>
+          </tr>
+          <tr>
+            <td>34 - L</td>
+            <td>86 - 91cm / 34 - 36"</td>
+          </tr>
+          <tr>
+            <td>36 - XL</td>
+            <td>91 - 97cm / 36 - 38"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+
+<!-- Womens Bottoms Size Guide -->
+<div id="size-guide-womens-bottoms">
+  <details>
+    <summary>Women’s Bottoms</summary>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>SIZE</th>
+            <th>NATURAL WAIST</th>
+            <th>HIGH TOP</th>
+            <th>HIP</th>
+            <th>THIGH</th>
+            <th>RISE</th>
+            <th>INSIDE LEG</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>8 - XS</td>
+            <td>63.5cm / 25"</td>
+            <td>81cm / 31¾"</td>
+            <td>89cm / 35"</td>
+            <td>53cm / 20¾"</td>
+            <td>66cm / 26"</td>
+            <td>78cm / 30¾"</td>
+          </tr>
+          <tr>
+            <td>10 - S</td>
+            <td>68.5cm / 27"</td>
+            <td>86cm / 33¾"</td>
+            <td>94cm / 37"</td>
+            <td>55.5cm / 21¾"</td>
+            <td>68cm / 26¾"</td>
+            <td>78cm / 30¾"</td>
+          </tr>
+          <tr>
+            <td>12 - M</td>
+            <td>73.5cm / 29"</td>
+            <td>91cm / 35¾"</td>
+            <td>99cm / 39"</td>
+            <td>58cm / 22¾"</td>
+            <td>70cm / 27½"</td>
+            <td>78cm / 30¾"</td>
+          </tr>
+          <tr>
+            <td>14 - L</td>
+            <td>78.5cm / 31"</td>
+            <td>96cm / 37¾"</td>
+            <td>104cm / 41"</td>
+            <td>60.5cm / 23¾"</td>
+            <td>72cm / 28¼"</td>
+            <td>78cm / 30¾"</td>
+          </tr>
+          <tr>
+            <td>16 - XL</td>
+            <td>83.5cm / 33"</td>
+            <td>101cm / 39¾"</td>
+            <td>109cm / 43"</td>
+            <td>63.5cm / 25"</td>
+            <td>74cm / 29"</td>
+            <td>78cm / 30¾"</td>
+          </tr>
+          <tr>
+            <td>18 - 2XL</td>
+            <td>89.5cm / 35½"</td>
+            <td>107cm / 42¼"</td>
+            <td>115cm / 45½"</td>
+            <td>66.5cm / 26¼"</td>
+            <td>77cm / 30¼"</td>
+            <td>78cm / 30¾"</td>
+          </tr>
+          <tr>
+            <td>20 - 3XL</td>
+            <td>95.5cm / 38"</td>
+            <td>113cm / 44¾"</td>
+            <td>121cm / 48"</td>
+            <td>66.5cm / 26¼"</td>
+            <td>80cm / 31½"</td>
+            <td>78cm / 30¾"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+
+<!-- Womens Dresses Size Guide -->
+<div id="size-guide-womens">
+  <details>
+    <summary>Women’s Dresses</summary>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>SIZE</th>
+            <th>BUST</th>
+            <th>NATURAL WAIST</th>
+            <th>HIGH HIP</th>
+            <th>HIP</th>
+            <th>ARM LENGTH</th>
+            <th>TOTAL HEIGHT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>8 - XS</td>
+            <td>82cm / 32"</td>
+            <td>63.5cm / 25"</td>
+            <td>81cm / 31¾"</td>
+            <td>89cm / 35"</td>
+            <td>75cm / 29¾"</td>
+            <td>170cm / 67"</td>
+          </tr>
+          <tr>
+            <td>10 - S</td>
+            <td>87cm / 34"</td>
+            <td>68.5cm / 27"</td>
+            <td>86cm / 33¾"</td>
+            <td>94cm / 37"</td>
+            <td>76.5cm / 30¼"</td>
+            <td>170cm / 67"</td>
+          </tr>
+          <tr>
+            <td>12 - M</td>
+            <td>92cm / 36"</td>
+            <td>73.5cm / 29"</td>
+            <td>91cm / 35¾"</td>
+            <td>99cm / 39"</td>
+            <td>78cm / 30¾"</td>
+            <td>170cm / 67"</td>
+          </tr>
+          <tr>
+            <td>14 - L</td>
+            <td>97cm / 38"</td>
+            <td>78.5cm / 31"</td>
+            <td>96cm / 37¾"</td>
+            <td>104cm / 41¾"</td>
+            <td>79.5cm / 31¾"</td>
+            <td>170cm / 67"</td>
+          </tr>
+          <tr>
+            <td>16 - XL</td>
+            <td>102cm / 40"</td>
+            <td>83.5cm / 33"</td>
+            <td>101cm / 39¾"</td>
+            <td>109cm / 43"</td>
+            <td>81cm / 32"</td>
+            <td>170cm / 67"</td>
+          </tr>
+          <tr>
+            <td>18 - 2XL</td>
+            <td>108cm / 42½"</td>
+            <td>89.5cm / 35½"</td>
+            <td>107cm / 42¼"</td>
+            <td>115cm / 45½"</td>
+            <td>83cm / 32¾"</td>
+            <td>170cm / 67"</td>
+          </tr>
+          <tr>
+            <td>20 - 3XL</td>
+            <td>114cm / 45"</td>
+            <td>95.5cm / 38"</td>
+            <td>113cm / 44¾"</td>
+            <td>121cm / 48"</td>
+            <td>80cm / 33½"</td>
+            <td>170cm / 67"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+
+<!-- Womens Size Guide -->
+<div id="size-guide-womens">
+  <details>
+    <summary>Women’s Tops</summary>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>SIZE</th>
+            <th>BUST</th>
+            <th>NATURAL WAIST</th>
+            <th>ARM LENGTH</th>
+            <th>LENGTH</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>8 - XS</td>
+            <td>82cm / 32"</td>
+            <td>63.5cm / 25"</td>
+            <td>75cm / 29¾"</td>
+            <td>69cm / 27⅛"</td>
+          </tr>
+          <tr>
+            <td>10 - S</td>
+            <td>87cm / 34"</td>
+            <td>68.5cm / 27"</td>
+            <td>76.5cm / 30¼"</td>
+            <td>71cm / 27⅞"</td>
+          </tr>
+          <tr>
+            <td>12 - M</td>
+            <td>92cm / 36"</td>
+            <td>73.5cm / 29"</td>
+            <td>78cm / 30¾"</td>
+            <td>73cm / 28¾"</td>
+          </tr>
+          <tr>
+            <td>14 - L</td>
+            <td>97cm / 38"</td>
+            <td>78.5cm / 31"</td>
+            <td>79.5cm / 31¼"</td>
+            <td>75cm / 29½"</td>
+          </tr>
+          <tr>
+            <td>16 - XL</td>
+            <td>102cm / 40"</td>
+            <td>83.5cm / 33"</td>
+            <td>81cm / 32"</td>
+            <td>77cm / 30¼"</td>
+          </tr>
+          <tr>
+            <td>18 - 2XL</td>
+            <td>108cm / 42.5"</td>
+            <td>89.5cm / 35.5"</td>
+            <td>83cm / 32¾"</td>
+            <td>79cm / 31⅛"</td>
+          </tr>
+          <tr>
+            <td>20 - 3XL</td>
+            <td>114cm / 45"</td>
+            <td>95.5cm / 38"</td>
+            <td>85cm / 33½"</td>
+            <td>79cm / 31⅛"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+
+<div id="size-guide-boys">
+  <details>
+    <summary>Boys 3 - 16 Yrs</summary>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">AGE</th>
+            <th scope="col">HEIGHT</th>
+            <th scope="col">CHEST</th>
+            <th scope="col">WAIST</th>
+            <th scope="col">HIPS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3 - 4 Yrs</td>
+            <td>98 - 104cm / 38.5 - 41"</td>
+            <td>55 - 57cm / 21.5 - 22"</td>
+            <td>53 - 54cm / 20 - 21"</td>
+            <td>58 - 60cm / 23 - 23.5"</td>
+          </tr>
+          <tr>
+            <td>5 - 6 Yrs</td>
+            <td>110 - 116cm / 43.5 - 45.5"</td>
+            <td>59 - 61cm / 23 - 24"</td>
+            <td>55 - 57cm / 21 - 22"</td>
+            <td>62 - 65cm / 24.5 - 25.5"</td>
+          </tr>
+          <tr>
+            <td>7 - 8 Yrs</td>
+            <td>122 - 128cm / 48 - 50.5"</td>
+            <td>63 - 67cm / 25 - 26.5"</td>
+            <td>59 - 60cm / 23 - 23.5"</td>
+            <td>68 - 70cm / 26.5 - 27.5"</td>
+          </tr>
+          <tr>
+            <td>8 - 9 Yrs</td>
+            <td>128 - 134cm / 50.5 - 52.5"</td>
+            <td>67 - 70cm / 26.5 - 27.5"</td>
+            <td>60 - 62cm / 23.5 - 24.5"</td>
+            <td>70 - 73cm / 27.5 - 28.5"</td>
+          </tr>
+          <tr>
+            <td>9 - 10 Yrs</td>
+            <td>134 - 140cm / 52.5 - 55"</td>
+            <td>70 - 73cm / 27.5 - 29"</td>
+            <td>62 - 64cm / 24.5 - 25"</td>
+            <td>73 - 76cm / 28.5 - 30"</td>
+          </tr>
+          <tr>
+            <td>10 - 11 Yrs</td>
+            <td>140 - 146cm / 55 - 57.5"</td>
+            <td>73 - 76cm / 29 - 30"</td>
+            <td>64 - 66cm / 25 - 26"</td>
+            <td>76 - 79cm / 30 - 31"</td>
+          </tr>
+          <tr>
+            <td>12 - 13 Yrs</td>
+            <td>152 - 158cm / 60 - 62"</td>
+            <td>79 - 82cm / 31 - 32"</td>
+            <td>68 - 70cm / 26.5 - 27.5"</td>
+            <td>82 - 85cm / 31.5 - 33.5"</td>
+          </tr>
+          <tr>
+            <td>14 - 15 Yrs</td>
+            <td>164 - 170cm / 64.5 - 67"</td>
+            <td>86 - 89cm / 34 - 35"</td>
+            <td>72 - 74cm / 28.5 - 29"</td>
+            <td>88 - 91cm / 34.5 - 36"</td>
+          </tr>
+          <tr>
+            <td>15 - 16 Yrs</td>
+            <td>170 - 176cm / 67 - 69"</td>
+            <td>89 - 92cm / 35 - 36"</td>
+            <td>74 - 76cm / 29 - 30"</td>
+            <td>91 - 94cm / 36 - 37"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+<div id="size-guide">
+  <details>
+    <summary>Girls 3 - 16 Yrs</summary>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">AGE</th>
+            <th scope="col">HEIGHT</th>
+            <th scope="col">CHEST</th>
+            <th scope="col">WAIST</th>
+            <th scope="col">HIPS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3 - 4 Yrs</td>
+            <td>98 - 104cm / 38.5 - 41"</td>
+            <td>55 - 57cm / 21.5 - 22"</td>
+            <td>53 - 54cm / 20 - 21"</td>
+            <td>58 - 60cm / 23 - 23.5"</td>
+          </tr>
+          <tr>
+            <td>5 - 6 Yrs</td>
+            <td>110 - 116cm / 43.5 - 45.5"</td>
+            <td>59 - 61cm / 23 - 24"</td>
+            <td>55 - 57cm / 21 - 22"</td>
+            <td>62 - 65cm / 24.5 - 25.5"</td>
+          </tr>
+          <tr>
+            <td>7 - 8 Yrs</td>
+            <td>122 - 128cm / 48 - 50.5"</td>
+            <td>63 - 67cm / 25 - 26.5"</td>
+            <td>57 - 59cm / 22 - 23"</td>
+            <td>70 - 73cm / 27.5 - 28.5"</td>
+          </tr>
+          <tr>
+            <td>8 - 9 Yrs</td>
+            <td>128 - 134cm / 50.5 - 52.5"</td>
+            <td>67 - 70cm / 26.5 - 27.5"</td>
+            <td>59 - 60cm / 23 - 23.5"</td>
+            <td>73 - 76cm / 28.5 - 30"</td>
+          </tr>
+          <tr>
+            <td>9 - 10 Yrs</td>
+            <td>134 - 140cm / 52.5 - 55"</td>
+            <td>70 - 73cm / 27.5 - 29"</td>
+            <td>60 - 62cm / 23.5 - 24.5"</td>
+            <td>76 - 79cm / 30 - 31"</td>
+          </tr>
+          <tr>
+            <td>10 - 11 Yrs</td>
+            <td>140 - 146cm / 55 - 57.5"</td>
+            <td>73 - 76cm / 29 - 30"</td>
+            <td>62 - 64cm / 24.5 - 25"</td>
+            <td>82 - 85cm / 31.5 - 33.5"</td>
+          </tr>
+          <tr>
+            <td>12 - 13 Yrs</td>
+            <td>152 - 158cm / 60 - 62"</td>
+            <td>79 - 82cm / 31 - 32"</td>
+            <td>64 - 66cm / 25 - 26"</td>
+            <td>88 - 91cm / 34.5 - 36"</td>
+          </tr>
+          <tr>
+            <td>14 - 15 Yrs</td>
+            <td>164 - 166cm / 64.5 - 65"</td>
+            <td>86 - 89cm / 34 - 35"</td>
+            <td>68 - 70cm / 26.5 - 27.5"</td>
+            <td>91 - 95cm / 36 - 37"</td>
+          </tr>
+          <tr>
+            <td>15 - 16 Yrs</td>
+            <td>166 - 168cm / 65.5 - 66"</td>
+            <td>89 - 92cm / 35 - 36"</td>
+            <td>72 - 74cm / 28.5 - 29"</td>
+            <td>95 - 99cm / 37 - 39"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+  
+<div id="size-guide-babies">
+  <details>
+    <summary>Babies 0 - 6 Months</summary>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">AGE</th>
+            <th scope="col">HEIGHT</th>
+            <th scope="col">CHEST</th>
+            <th scope="col">WAIST</th>
+            <th scope="col">HIPS</th>
+            <th scope="col">WEIGHT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0 - 6 Months</td>
+            <td>68cm / 26.5"</td>
+            <td>45.5cm / 18"</td>
+            <td>45cm / 17.5"</td>
+            <td>46cm / 18"</td>
+            <td>8kgs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+<div id="size-guide-toddlers">
+  <details>
+    <summary>Toddlers 0 - 36 Months</summary>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">AGE</th>
+            <th scope="col">HEIGHT</th>
+            <th scope="col">CHEST</th>
+            <th scope="col">WAIST</th>
+            <th scope="col">HIPS</th>
+            <th scope="col">WEIGHT</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>6 Months</td>
+            <td>68cm / 26.5"</td>
+            <td>45.5cm / 18"</td>
+            <td>45cm / 17.5"</td>
+            <td>46cm / 18"</td>
+            <td>8kgs</td>
+          </tr>
+          <tr>
+            <td>9 Months</td>
+            <td>74cm / 29"</td>
+            <td>47cm / 18.5"</td>
+            <td>46.5cm / 18.5"</td>
+            <td>48cm / 19"</td>
+            <td>9kgs</td>
+          </tr>
+          <tr>
+            <td>12 Months</td>
+            <td>80cm / 31.5"</td>
+            <td>49.5cm / 19.5"</td>
+            <td>49cm / 19"</td>
+            <td>52cm / 20.5"</td>
+            <td>10kgs</td>
+          </tr>
+          <tr>
+            <td>18 Months</td>
+            <td>86cm / 34"</td>
+            <td>51cm / 20"</td>
+            <td>50cm / 19.5"</td>
+            <td>54cm / 21"</td>
+            <td>11kgs</td>
+          </tr>
+          <tr>
+            <td>24 Months</td>
+            <td>92cm / 36"</td>
+            <td>53cm / 21"</td>
+            <td>51cm / 20"</td>
+            <td>56cm / 22"</td>
+            <td>12.5kgs</td>
+          </tr>
+          <tr>
+            <td>36 Months</td>
+            <td>98cm / 38.5"</td>
+            <td>55cm / 21.5"</td>
+            <td>52cm / 20.5"</td>
+            <td>58cm / 23"</td>
+            <td>14.5kgs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+<!-- Socks Size Guide -->
+<div id="size-guide-mens-bottoms">
+  <details>
+    <summary>Socks</summary>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>SIZE</th>
+            <th>SHOE SIZE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>M</td>
+            <td>UK 6 - 8 / EU 39 - 42</td>
+          </tr>
+          <tr>
+            <td>L</td>
+            <td>UK 9 - 12 / EU 43 - 46</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>
